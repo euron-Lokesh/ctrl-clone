@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <>
       <Header />
+      <Hero />
 
       {/* Temporary sections for testing scroll */}
       <section className="min-h-screen flex items-center justify-center bg-white">
