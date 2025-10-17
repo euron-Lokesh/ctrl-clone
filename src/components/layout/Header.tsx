@@ -1,10 +1,10 @@
 "use client";
-
 import { useEffect, useRef } from "react";
 import { animate } from "animejs";
 import Button from "@/components/ui/Button";
 import CtrlLogoIcon from "../icons/CtrlLogo";
 import Link from "next/link";
+import { useAnimation } from "@/context/AnimationContext";
 
 export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
@@ -12,18 +12,23 @@ export default function Header() {
   const navRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLDivElement>(null);
   const lastScroll = useRef(0);
+  const { phase, setPhase } = useAnimation();
 
+  // Auto-animate when phase changes to 'headerAndButton'
   useEffect(() => {
-    if (headerRef.current) {
+    if (phase === "header" && headerRef.current) {
       animate(headerRef.current, {
         translateY: { from: -100, to: 0 },
         opacity: { from: 0, to: 1 },
         duration: 800,
         ease: "outCubic",
+        complete: () => {
+          setPhase("button");
+        },
       });
     }
-  }, []);
-
+  }, [phase, setPhase]);
+  // Scroll handling (unchanged)
   useEffect(() => {
     const handleScroll = () => {
       const scroll = window.scrollY;
@@ -72,6 +77,7 @@ export default function Header() {
     <header
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50 bg-[#FAFAFA]"
+      style={{ opacity: 0, transform: "translateY(-100px)" }}
     >
       <nav className="max-w-[90rem] mx-auto px-6 md:px-8 py-8 flex items-center justify-between">
         <div ref={logoRef} className="flex items-center gap-2">
@@ -89,7 +95,6 @@ export default function Header() {
             $CTRL
           </Link>
           <span className="text-gray-400">|</span>
-
           <Link
             href="#support"
             className="group relative px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-[#D1D6D1]"
@@ -97,7 +102,6 @@ export default function Header() {
             Support
           </Link>
           <span className="text-gray-400">|</span>
-
           <Link
             href="#security"
             className="group relative px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-[#D1D6D1]"
@@ -105,7 +109,6 @@ export default function Header() {
             Security
           </Link>
           <span className="text-gray-400">|</span>
-
           <Link
             href="#resources"
             className="group relative px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-[#D1D6D1]"

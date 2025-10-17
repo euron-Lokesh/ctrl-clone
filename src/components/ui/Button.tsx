@@ -14,13 +14,13 @@ export default function Button({
   icon,
 }: ButtonProps) {
   const baseStyles =
-    "relative px-8 py-3 border-2 border-black rounded-full font-medium overflow-hidden inline-flex items-center justify-center gap-2";
+    "relative  py-3 border-2 border-black rounded-full font-medium overflow-hidden inline-flex items-center justify-center gap-2";
 
   const variants = {
-    green: "bg-[#02C92F] text-black ",
-    black: "bg-black text-white",
+    green: "px-12 bg-[#02C92F] text-black ",
+    black: "px-8 bg-black text-white",
     outline:
-      "border-2 border-black text-black hover:bg-black hover:text-white transition-all duration-300",
+      "border-2 px-8 border-black text-black hover:bg-black hover:text-white transition-all duration-300",
   };
 
   const needsSlideEffect = variant === "green" || variant === "black";
