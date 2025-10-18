@@ -46,18 +46,22 @@ export default function HeroSection({
           ".top-text",
           {
             opacity: [0, 1],
-            translateY: [30, 0],
-            duration: 800,
+            translateY: [140, 0],
+            duration: 400,
             ease: "outQuad",
           },
-          500
+          300
         )
-        .add(".dot", {
-          left: [{ from: "50%", to: "0%" }],
-          ease: "inOut",
-          duration: 300, // Changed from 400 to 200 (2x faster)
-          opacity: 1,
-        })
+        .add(
+          ".dot",
+          {
+            left: [{ from: "50%", to: "0%" }],
+            ease: "inOut",
+            duration: 300, // Changed from 400 to 200 (2x faster)
+            opacity: 1,
+          },
+          "-=100"
+        )
         .add(".dot", {
           left: [{ to: "calc(100% + 80px)", duration: 600 }], // Changed from 900 to 400 (2.25x faster)
           ease: "outBack(1.2)",
@@ -152,7 +156,7 @@ export default function HeroSection({
   };
 
   return (
-    <section className={`min-h-screen bg-[#FAFAFA] pt-72 pb-20 ${className}`}>
+    <section className={`bg-[#FAFAFA] pt-72 ${className}`}>
       <div className="max-w-7xl mx-auto px-6" ref={root}>
         <div className="text-center mb-2 top-text" style={{ opacity: 0 }}>
           <p className="text-xl md:text-2xl lg:text-[28px]">One wallet</p>
@@ -201,7 +205,7 @@ export default function HeroSection({
           </Button>
         </div>
 
-        <div className="h-40"></div>
+        {/* <div className="h-40"></div> */}
       </div>
     </section>
   );
