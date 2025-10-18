@@ -1,6 +1,7 @@
 "use client";
 import CtrlBadgeIcon from "@/components/icons/ctrlBadgeIcon";
 import Header from "@/components/layout/Header";
+import FeaturesSection from "@/components/sections/Features";
 import HeroSection from "@/components/sections/HeroSection";
 import { AnimationProvider } from "@/context/AnimationContext";
 
@@ -9,7 +10,7 @@ export default function Home() {
     <AnimationProvider>
       <Header />
       <HeroSection BadgeIcon={<CtrlBadgeIcon size={120} />} text="Take Ctrl" />
-
+      <FeaturesSection />
       {/* Temporary sections for testing scroll */}
       <section className="min-h-screen flex items-center justify-center bg-white">
         <h2 className="text-4xl font-bold">Section 2</h2>
