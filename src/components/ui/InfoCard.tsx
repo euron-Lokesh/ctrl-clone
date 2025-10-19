@@ -1,17 +1,49 @@
-// InfoCard.tsx
 interface InfoCardProps {
   title: string;
-  svgComponent: React.ReactNode;
+  svgComponent?: React.ReactNode;
+  subtext?: string;
+  videoSrc?: string;
+  className?: string;
+  titleClassName?: string;
+  subtextClassName?: string;
 }
 
-export function InfoCard({ title, svgComponent }: InfoCardProps) {
+export function InfoCard({
+  title,
+  svgComponent,
+  subtext,
+  videoSrc,
+  className = "",
+  titleClassName = "text-3xl font-medium text-black pr-16",
+  subtextClassName = "text-gray-700 text-base mt-2 pr-10 leading-snug",
+}: InfoCardProps) {
   return (
-    <div className="bg-[#ECEFEC] border-2 border-gray-200 w-full h-full rounded-2xl p-6 relative">
-      {/* Text at top */}
-      <h3 className="text-3xl font-medium text-black pr-16">{title}</h3>
+    <div
+      className={`bg-[#ECEFEC] h-full border-2 border-gray-200 rounded-2xl p-6 relative overflow-hidden ${className}`}
+    >
+      {/* Title */}
+      <h3 className={titleClassName}>{title}</h3>
 
-      {/* SVG at bottom left - absolute positioned */}
-      <div className="absolute bottom-6 left-6">{svgComponent}</div>
+      {/* Optional Subtext */}
+      {subtext && <p className={subtextClassName}>{subtext}</p>}
+
+      {/* Optional SVG */}
+      {svgComponent && (
+        <div className="absolute bottom-6 left-6 z-10">{svgComponent}</div>
+      )}
+
+      {/* Optional Video */}
+      {videoSrc && (
+        <video
+          className="absolute bottom-0 left-0 right-0 w-full h-[59%] object-cover z-0"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      )}
     </div>
   );
 }

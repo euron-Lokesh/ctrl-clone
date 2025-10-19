@@ -223,7 +223,7 @@ export default function FeaturesSection() {
   }, []);
 
   return (
-    <section className="features-scroll-wrapper relative w-full h-[3500px] bg-white z-40">
+    <section className="features-scroll-wrapper relative w-full h-[2000px] bg-white z-40">
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden z-40">
         <div className="features-layout w-full h-full flex items-center justify-center">
           {/* Main container - all elements positioned relative to this center */}
@@ -246,7 +246,7 @@ export default function FeaturesSection() {
                 muted
                 playsInline
               >
-                <source src="/boxVideo-1.mp4" type="video/mp4" />
+                <source src="/videos/boxVideo-1.mp4" type="video/mp4" />
               </video>
 
               {/* Video 2 - First card appearance */}
@@ -258,7 +258,7 @@ export default function FeaturesSection() {
                 playsInline
                 style={{ transform: "translateY(100%)" }}
               >
-                <source src="/boxVideo-2.mp4" type="video/mp4" />
+                <source src="/videos/boxVideo-2.mp4" type="video/mp4" />
               </video>
 
               {/* Video 3 - Second card appearance */}
@@ -270,7 +270,7 @@ export default function FeaturesSection() {
                 playsInline
                 style={{ transform: "translateY(100%)" }}
               >
-                <source src="/boxVideo-3.mp4" type="video/mp4" />
+                <source src="/videos/boxVideo-3.mp4" type="video/mp4" />
               </video>
 
               {/* Video 4 - Third card appearance */}
@@ -282,7 +282,7 @@ export default function FeaturesSection() {
                 playsInline
                 style={{ transform: "translateY(100%)" }}
               >
-                <source src="/boxVideo-4.mp4" type="video/mp4" />
+                <source src="/videos/boxVideo-4.mp4" type="video/mp4" />
               </video>
             </div>
 
@@ -308,6 +308,7 @@ export default function FeaturesSection() {
                     text={card.text}
                     icon={card.icon}
                     pillText={card.pillText}
+                    className="p-6 text-3xl font-bold"
                   />
                 </div>
               </div>
