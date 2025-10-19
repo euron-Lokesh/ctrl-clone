@@ -49,106 +49,95 @@ export default function FeaturesSection() {
     const featuresScrollTimeline = createTimeline({
       autoplay: onScroll({
         container: "body",
-        sync: 0.5,
         target: ".features-scroll-wrapper",
-        enter: "top top",
-        leave: "bottom bottom",
+        axis: "y",
+        sync: true,
       }),
+      defaults: {
+        duration: 1800,
+        ease: "outQuart",
+      },
     });
 
-    // Stage 1: Video appears and centers
+    // --- Stage 1: Video appears and centers ---
     featuresScrollTimeline.add(".video-container", {
       translateY: [{ from: "100vh", to: "0vh" }],
       opacity: [{ from: 0, to: 1 }],
-      scale: [{ from: 0.8, to: 1 }],
-      duration: 1500,
-      ease: "outExpo",
+      scale: [{ from: 0.85, to: 1 }],
+      duration: 2200,
+      ease: "outQuart",
     });
 
-    // Stage 1.5: Hold video at center (user needs to scroll to trigger cards)
+    // --- Stage 1.5: Hold video ---
     featuresScrollTimeline.add(".video-container", {
       translateY: [{ from: "0vh", to: "0vh" }],
-      duration: 1200,
+      duration: 1600,
       ease: "linear",
     });
 
-    // Stage 2: Cards appear and animate in sequence (LEFT and RIGHT in sync)
+    // --- Stage 2: Cards & videos in sequence ---
     leftCards.forEach((card, index) => {
       const leftClass = `.left-card-${index}`;
       const leftInnerClass = `.left-card-${index}-inner`;
       const rightClass = `.right-card-${index}`;
       const videoClass = `.video-${index + 2}`; // video-2, video-3, video-4
 
-      const baseDelay = index === 0 ? "+=100" : "+=900";
+      const baseDelay = index === 0 ? "+=0" : "+=1200";
 
-      // 1. LEFT card appears
+      // --- LEFT card appears ---
       featuresScrollTimeline.add(
         leftClass,
         {
           translateY: [{ from: "100vh", to: "0vh" }],
           opacity: [{ from: 0, to: 1 }],
-          scale: [{ from: 0.8, to: 1 }],
-          duration: 1100,
-          ease: "outExpo",
+          scale: [{ from: 0.9, to: 1 }],
+          duration: 1800,
+          ease: "outQuart",
         },
         baseDelay
       );
 
-      // 1b. RIGHT card appears at the same time (in sync with left card)
+      // --- RIGHT card appears in sync ---
+      featuresScrollTimeline.add(
+        rightClass,
+        {
+          translateY: [{ from: "100vh", to: "0vh" }],
+          opacity: [{ from: 0, to: 1 }],
+          scale: [{ from: 0.95, to: 1 }],
+          duration: 1800,
+          ease: "outQuart",
+        },
+        "<<"
+      );
+
+      // --- VIDEO TRANSITION LOGIC (from your GitHub version) ---
       if (index === 0) {
-        // First right card appears
+        // First transition: video-1 → video-2
         featuresScrollTimeline.add(
-          rightClass,
+          ".video-1",
           {
-            translateY: [{ from: "100vh", to: "0vh" }],
-            opacity: [{ from: 0, to: 1 }],
-            scale: [{ from: 0.95, to: 1 }],
+            translateY: [{ from: "0%", to: "-100%" }],
+            opacity: [{ from: 1, to: 0 }],
             duration: 1100,
-            ease: "outExpo",
+            ease: "inOutQuad",
           },
-          "<<" // Same time as left card
+          "<<" // same time as first card appears
         );
 
-        // Video 2 slides up and fades in (exact sync with cards)
         featuresScrollTimeline.add(
-          videoClass,
+          ".video-2",
           {
             translateY: [{ from: "100%", to: "0%" }],
             opacity: [{ from: 0, to: 1 }],
             duration: 1100,
             ease: "outExpo",
           },
-          "<<" // Same time as cards
+          "<<" // same time as video-1 fades
         );
       } else {
-        // Previous right card moves up and fades simultaneously
-        const prevRightClass = `.right-card-${index - 1}`;
-        featuresScrollTimeline.add(
-          prevRightClass,
-          {
-            translateY: [{ from: "0vh", to: "-50vh" }],
-            opacity: [{ from: 1, to: 0 }],
-            duration: 1000,
-            ease: "inOutQuad",
-          },
-          "<<" // Same time as new left card appears
-        );
-
-        // Current right card appears from bottom
-        featuresScrollTimeline.add(
-          rightClass,
-          {
-            translateY: [{ from: "100vh", to: "0vh" }],
-            opacity: [{ from: 0, to: 1 }],
-            scale: [{ from: 0.95, to: 1 }],
-            duration: 1100,
-            ease: "outExpo",
-          },
-          "-=600" // Overlap with previous card exit
-        );
-
-        // Previous video moves up and fades (exact sync)
+        // Subsequent transitions: video-(n+1) fades in, video-n fades out
         const prevVideoClass = `.video-${index + 1}`;
+
         featuresScrollTimeline.add(
           prevVideoClass,
           {
@@ -157,10 +146,9 @@ export default function FeaturesSection() {
             duration: 1100,
             ease: "inOutQuad",
           },
-          "<<" // Same time as cards transition
+          "<<" // with card transition
         );
 
-        // Current video slides up and fades in (exact sync with cards)
         featuresScrollTimeline.add(
           videoClass,
           {
@@ -169,53 +157,68 @@ export default function FeaturesSection() {
             duration: 1100,
             ease: "outExpo",
           },
-          "-=600" // Match card overlap timing
+          "-=600" // overlap fade timing (smooth crossfade)
         );
       }
 
-      // 2. Left card height reduces from bottom only
+      // --- Collapse left card height & hide text (paired with right card fade) ---
       featuresScrollTimeline
         .add(
           leftInnerClass,
           {
             height: [{ from: "280px", to: "84px" }],
-            duration: 1000,
-            ease: "inOutQuad",
+            duration: 1600,
+            ease: "inOutCubic",
           },
-          "+=800"
+          "+=1000"
         )
-        // Animate left card text upward to hide it during collapse
         .add(
           `${leftClass} h3`,
           {
             translateY: [{ from: 0, to: -60 }],
             opacity: [{ from: 1, to: 0 }],
-            duration: 800,
-            ease: "inOutQuad",
+            duration: 1200,
+            ease: "inOutCubic",
           },
-          "-=800"
+          "-=1000"
+        )
+        // Right card fades/moves up at the same time
+        .add(
+          rightClass,
+          {
+            translateY: [{ from: "0vh", to: "-60vh" }],
+            opacity: [{ from: 1, to: 0 }],
+            duration: 1600,
+            ease: "inOutCubic",
+          },
+          "-=1400"
         );
     });
 
-    // Final right card exits
+    // --- Final hold after last card collapse ---
     featuresScrollTimeline.add(
-      `.right-card-${rightCards.length - 1}`,
+      `.left-card-${leftCards.length - 1}`,
       {
-        translateY: [{ from: "0vh", to: "-50vh" }],
-        opacity: [{ from: 1, to: 0 }],
-        duration: 1000,
-        ease: "inOutQuad",
+        translateY: [{ from: "0vh", to: "0vh" }],
+        duration: 1400,
+        ease: "linear",
       },
-      "+=800"
+      "+=600"
     );
 
-    // Stage 3: Final exit
-    featuresScrollTimeline.add(".features-layout", {
-      translateY: [{ from: 0, to: "-100vh" }],
-      opacity: [{ from: 1, to: 0 }],
-      duration: 1000,
-      ease: "inExpo",
-    });
+    // --- Let the last video persist (no fade-out) ---
+
+    // --- Final layout exit ---
+    featuresScrollTimeline.add(
+      ".features-layout",
+      {
+        translateY: [{ from: 0, to: "-100vh" }],
+        opacity: [{ from: 1, to: 0 }],
+        duration: 1800,
+        ease: "inOutCubic",
+      },
+      "+=1000"
+    );
 
     return () => {
       featuresScrollTimeline.pause();
@@ -223,12 +226,11 @@ export default function FeaturesSection() {
   }, []);
 
   return (
-    <section className="features-scroll-wrapper relative w-full h-[2000px] bg-white z-40">
+    <section className="features-scroll-wrapper pt-24 relative w-full h-[800vh] bg-white z-40">
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden z-40">
         <div className="features-layout w-full h-full flex items-center justify-center">
-          {/* Main container - all elements positioned relative to this center */}
           <div className="relative">
-            {/* Center Video - Primary anchor point */}
+            {/* --- Video Container --- */}
             <div
               className="video-container w-[416px] h-[638px] border-3 bg-gray-100 rounded-3xl overflow-hidden opacity-0 z-20 absolute"
               style={{
@@ -238,7 +240,6 @@ export default function FeaturesSection() {
                 marginLeft: "-192px",
               }}
             >
-              {/* Video 1 - Default/Background */}
               <video
                 className="video-1 w-full h-full object-cover absolute top-0 left-0"
                 autoPlay
@@ -248,8 +249,6 @@ export default function FeaturesSection() {
               >
                 <source src="/videos/boxVideo-1.mp4" type="video/mp4" />
               </video>
-
-              {/* Video 2 - First card appearance */}
               <video
                 className="video-2 w-full h-full object-cover absolute top-0 left-0 opacity-0"
                 autoPlay
@@ -260,8 +259,6 @@ export default function FeaturesSection() {
               >
                 <source src="/videos/boxVideo-2.mp4" type="video/mp4" />
               </video>
-
-              {/* Video 3 - Second card appearance */}
               <video
                 className="video-3 w-full h-full object-cover absolute top-0 left-0 opacity-0"
                 autoPlay
@@ -272,8 +269,6 @@ export default function FeaturesSection() {
               >
                 <source src="/videos/boxVideo-3.mp4" type="video/mp4" />
               </video>
-
-              {/* Video 4 - Third card appearance */}
               <video
                 className="video-4 w-full h-full object-cover absolute top-0 left-0 opacity-0"
                 autoPlay
@@ -286,7 +281,7 @@ export default function FeaturesSection() {
               </video>
             </div>
 
-            {/* Left Cards - Close to video */}
+            {/* --- Left Cards --- */}
             {leftCards.map((card, index) => (
               <div
                 key={index}
@@ -299,9 +294,7 @@ export default function FeaturesSection() {
               >
                 <div
                   className={`left-card-${index}-inner overflow-hidden rounded-2xl`}
-                  style={{
-                    height: "280px",
-                  }}
+                  style={{ height: "280px" }}
                 >
                   <ColoredCard
                     color={card.color}
@@ -314,7 +307,7 @@ export default function FeaturesSection() {
               </div>
             ))}
 
-            {/* Right Cards - One at a time in center */}
+            {/* --- Right Cards --- */}
             {rightCards.map((card, index) => (
               <div
                 key={index}
@@ -327,9 +320,7 @@ export default function FeaturesSection() {
               >
                 <div
                   className={`right-card-${index}-inner overflow-hidden rounded-2xl`}
-                  style={{
-                    height: "350px",
-                  }}
+                  style={{ height: "350px" }}
                 >
                   <InfoCard
                     title={card.title}

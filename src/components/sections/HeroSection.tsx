@@ -1,8 +1,8 @@
 "use client";
 import { createTimeline } from "animejs";
 import { useEffect, useRef } from "react";
-import ChromeIcon from "../icons/ChromeIcon";
-import Button from "../ui/Button";
+// import ChromeIcon from "../icons/ChromeIcon";
+// import Button from "../ui/Button";
 import { useAnimation } from "@/context/AnimationContext";
 
 interface HeroSectionProps {
@@ -106,33 +106,33 @@ export default function HeroSection({
   }, [phase, BadgeIcon, setPhase]);
 
   // Handle button animation separately when header is done
-  useEffect(() => {
-    if (phase === "button") {
-      const timeline = createTimeline({
-        autoplay: true,
-      });
+  // useEffect(() => {
+  //   if (phase === "button") {
+  //     const timeline = createTimeline({
+  //       autoplay: true,
+  //     });
 
-      // Button expansion animation - width grows from icon size to full size
-      timeline
-        .add(".hero-button", {
-          scaleX: [0.2, 1], // Start narrow (icon width), expand to full width
-          opacity: [0, 1],
-          duration: 600,
-          ease: "outCubic",
-        })
-        // Text slides up from bottom to center simultaneously
-        .add(
-          ".button-text",
-          {
-            translateY: [20, 0], // Slide up from below
-            opacity: [0, 1],
-            duration: 400,
-            ease: "outQuad",
-          },
-          "-=400" // Start 200ms before button expansion finishes
-        );
-    }
-  }, [phase]);
+  //     // Button expansion animation - width grows from icon size to full size
+  //     timeline
+  //       .add(".hero-button", {
+  //         scaleX: [0.2, 1], // Start narrow (icon width), expand to full width
+  //         opacity: [0, 1],
+  //         duration: 600,
+  //         ease: "outCubic",
+  //       })
+  //       // Text slides up from bottom to center simultaneously
+  //       .add(
+  //         ".button-text",
+  //         {
+  //           translateY: [20, 0], // Slide up from below
+  //           opacity: [0, 1],
+  //           duration: 400,
+  //           ease: "outQuad",
+  //         },
+  //         "-=400" // Start 200ms before button expansion finishes
+  //       );
+  //   }
+  // }, [phase]);
 
   // Split text logic
   const renderText = () => {
@@ -181,7 +181,7 @@ export default function HeroSection({
         </div>
 
         {/* Download button with special animation structure */}
-        <div
+        {/* <div
           className="flex justify-center mt-16 hero-button"
           style={{
             opacity: 0,
@@ -203,7 +203,7 @@ export default function HeroSection({
               Download for Chrome
             </span>
           </Button>
-        </div>
+        </div> */}
 
         {/* <div className="h-40"></div> */}
       </div>
