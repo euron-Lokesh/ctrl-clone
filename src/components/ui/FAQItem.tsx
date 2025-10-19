@@ -1,38 +1,35 @@
 "use client";
 
-import { useState } from "react";
-
 interface FAQItemProps {
   question: string;
   answer: string;
   className?: string;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
 export default function FAQItem({
   question,
   answer,
   className = "",
+  isOpen,
+  onToggle,
 }: FAQItemProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div
-      className={`bg-[#ECEFEC] w-[50%] border-2 border-black rounded-[2rem] overflow-hidden ${className}`}
+      className={`bg-[#ECEFEC] border-2 border-black rounded-2xl overflow-hidden transition-all duration-300 ${className}`}
     >
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-6 md:p-8 text-left group"
+        onClick={onToggle}
+        className="w-full flex items-center justify-between p-6 md:p-9 text-left group"
       >
-        <span className="text-lg md:text-xl lg:text-2xl  pr-4 text-black">
+        <span className="text-lg md:text-xl lg:text-3xl pr-4 text-[#0F0F0F]">
           {question}
         </span>
 
-        {/* Icon Circle with fill animation */}
         <div className="relative flex-shrink-0 w-12 h-12 md:w-14 md:h-14">
-          {/* Background circle that fills on hover */}
           <div className="absolute inset-0 rounded-full border-[3px] border-black bg-transparent group-hover:bg-black transition-all duration-500 ease-out" />
 
-          {/* Plus/Minus Icon */}
           <div className="absolute inset-0 flex items-center justify-center">
             <svg
               width="24"
@@ -44,7 +41,6 @@ export default function FAQItem({
                 group-hover:text-white text-black
               `}
             >
-              {/* Horizontal line (always visible) */}
               <line
                 x1="6"
                 y1="12"
@@ -54,7 +50,6 @@ export default function FAQItem({
                 strokeWidth="3"
                 strokeLinecap="round"
               />
-              {/* Vertical line (hidden when open) */}
               <line
                 x1="12"
                 y1="6"
@@ -73,7 +68,6 @@ export default function FAQItem({
         </div>
       </button>
 
-      {/* Answer content with smooth expand/collapse */}
       <div
         className={`
           grid transition-all duration-300 ease-in-out

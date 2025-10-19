@@ -1,16 +1,25 @@
 import React from "react";
 
-const RightCard3Svg: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+interface RightCard3SvgProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string; // optional prop to set width & height
+}
+
+const RightCard3Svg: React.FC<RightCard3SvgProps> = ({
+  size = 100,
+  width,
+  height,
+  ...props
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 180 100"
-    width="100"
-    height="100"
+    width={width ?? size}
+    height={height ?? size}
     preserveAspectRatio="xMidYMid meet"
     style={{
-      width: "100%",
-      height: "100%",
+      width: width ?? size,
+      height: height ?? size,
       transform: "translate3d(0px, 0px, 0px)",
       contentVisibility: "visible",
     }}

@@ -34,36 +34,36 @@ export default function Header() {
       const scroll = window.scrollY;
       const down = scroll > lastScroll.current;
 
+      // Hide logo + button when scrolling down
       if (down && scroll > 100 && logoRef.current && btnRef.current) {
         animate([logoRef.current, btnRef.current], {
-          translateY: -50,
+          translateY: -60,
           opacity: 0,
           duration: 300,
+          easing: "easeOutCubic",
         });
       }
 
-      if (down && scroll > 450 && navRef.current) {
-        animate(navRef.current, {
-          translateY: -50,
+      // Fully hide header itself when scrolled further
+      if (down && scroll > 200 && headerRef.current) {
+        animate(headerRef.current, {
+          translateY: "-100%", // moves header completely out of viewport
           opacity: 0,
-          duration: 300,
+          duration: 400,
+          easing: "easeInOutCubic",
         });
+        headerRef.current.style.pointerEvents = "none";
       }
 
-      if (!down && scroll >= 100 && navRef.current) {
-        animate(navRef.current, {
-          translateY: 0,
+      // Show header again when scrolling up
+      if (!down && scroll < lastScroll.current && headerRef.current) {
+        animate(headerRef.current, {
+          translateY: "0%",
           opacity: 1,
           duration: 400,
+          easing: "easeOutCubic",
         });
-      }
-
-      if (scroll < 50 && logoRef.current && btnRef.current && navRef.current) {
-        animate([logoRef.current, btnRef.current, navRef.current], {
-          translateY: 0,
-          opacity: 1,
-          duration: 400,
-        });
+        headerRef.current.style.pointerEvents = "auto";
       }
 
       lastScroll.current = scroll;
