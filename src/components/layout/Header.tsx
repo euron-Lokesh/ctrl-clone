@@ -34,36 +34,77 @@ export default function Header() {
       const scroll = window.scrollY;
       const down = scroll > lastScroll.current;
 
-      // Hide logo + button when scrolling down
-      if (down && scroll > 100 && logoRef.current && btnRef.current) {
-        animate([logoRef.current, btnRef.current], {
-          translateY: -60,
-          opacity: 0,
-          duration: 300,
-          easing: "easeOutCubic",
-        });
+      // --- Scroll Down ---
+      if (down) {
+        // Hide logo + button after 100px
+        if (scroll > 100 && logoRef.current && btnRef.current) {
+          animate([logoRef.current, btnRef.current], {
+            translateY: -60,
+            opacity: 0,
+            duration: 300,
+            easing: "easeOutCubic",
+          });
+        }
+
+        // Hide nav after 450px
+        if (scroll > 450 && navRef.current) {
+          animate(navRef.current, {
+            translateY: -60,
+            opacity: 0,
+            duration: 300,
+            easing: "easeOutCubic",
+          });
+        }
+
+        // Fully hide header itself (no blank space)
+        if (scroll > 500 && headerRef.current) {
+          animate(headerRef.current, {
+            translateY: "-100%",
+            opacity: 0,
+            duration: 400,
+            easing: "easeInOutCubic",
+          });
+          headerRef.current.style.pointerEvents = "none"; // so it doesn’t block clicks
+        }
       }
 
-      // Fully hide header itself when scrolled further
-      if (down && scroll > 200 && headerRef.current) {
-        animate(headerRef.current, {
-          translateY: "-100%", // moves header completely out of viewport
-          opacity: 0,
-          duration: 400,
-          easing: "easeInOutCubic",
-        });
-        headerRef.current.style.pointerEvents = "none";
-      }
+      // --- Scroll Up ---
+      if (!down) {
+        // Bring header back immediately when user scrolls up
+        if (headerRef.current) {
+          animate(headerRef.current, {
+            translateY: "0%",
+            opacity: 1,
+            duration: 400,
+            easing: "easeOutCubic",
+          });
+          headerRef.current.style.pointerEvents = "auto";
+        }
 
-      // Show header again when scrolling up
-      if (!down && scroll < lastScroll.current && headerRef.current) {
-        animate(headerRef.current, {
-          translateY: "0%",
-          opacity: 1,
-          duration: 400,
-          easing: "easeOutCubic",
-        });
-        headerRef.current.style.pointerEvents = "auto";
+        // Show nav again when scrolling up a bit
+        if (scroll >= 100 && navRef.current) {
+          animate(navRef.current, {
+            translateY: 0,
+            opacity: 1,
+            duration: 400,
+            easing: "easeOutCubic",
+          });
+        }
+
+        // When reaching the top, show everything
+        if (
+          scroll < 50 &&
+          logoRef.current &&
+          btnRef.current &&
+          navRef.current
+        ) {
+          animate([logoRef.current, btnRef.current, navRef.current], {
+            translateY: 0,
+            opacity: 1,
+            duration: 400,
+            easing: "easeOutCubic",
+          });
+        }
       }
 
       lastScroll.current = scroll;
