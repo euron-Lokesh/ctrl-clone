@@ -156,7 +156,7 @@ export default function HeroSection({
   };
 
   return (
-    <section className={`bg-[#FAFAFA] pt-72 ${className}`}>
+    <section className={` pt-72 ${className}`}>
       <div className="max-w-7xl mx-auto px-6" ref={root}>
         <div className="text-center mb-2 top-text" style={{ opacity: 0 }}>
           <p className="text-xl md:text-2xl lg:text-[28px]">One wallet</p>

@@ -137,7 +137,7 @@ const Overview: React.FC = () => {
   return (
     <section
       ref={overviewRef}
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-[#FFFFFF]"
       style={{ perspective: "1000px" }}
     >
       {/* First Section - Capture every opportunity */}

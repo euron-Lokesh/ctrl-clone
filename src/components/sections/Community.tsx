@@ -6,26 +6,23 @@ const CommunityDetails = [
   {
     color: "blue",
     text: "Founded in 2020, Ctrl (formerly XDEFI) was the world's first multichain wallet.",
-    videoSrc:
-      "/videos/community-video-1.mp4",
+    videoSrc: "/videos/community-video-1.mp4",
   },
   {
     color: "pink",
     text: "24/7 live customer support. Our global team is here to help you.",
-    videoSrc:
-      "/videos/community-video-2.mp4",
+    videoSrc: "/videos/community-video-2.mp4",
   },
   {
     color: "yellow",
     text: "4.8 star rating in the Google Chrome Store after 650+ reviews.",
-    videoSrc:
-      "/videos/community-video-3.mp4",
+    videoSrc: "/videos/community-video-3.mp4",
   },
 ];
 
 const Community = () => {
   return (
-    <div className="w-full  px-52 py-20 my-40 bg-[#F9FAF9]">
+    <div className="w-full mt-32 px-52 py-20 bg-[#F9FAF9]">
       {/* Header */}
       <div className="flex justify-end">
         <span className="text-5xl font-semibold mr-96 rounded-full">

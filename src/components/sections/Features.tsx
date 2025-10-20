@@ -7,6 +7,7 @@ import { InfoCard } from "../ui/InfoCard";
 // import RightCard1Svg from "../icons/RightCard1Svg";
 // import RightCard2Svg from "../icons/RightCard2Svg";
 import RightCard3Svg from "../icons/RightCard3Svg";
+import { useAnimation } from "@/context/AnimationContext";
 
 const leftCards = [
   {
@@ -17,13 +18,13 @@ const leftCards = [
   },
   {
     color: "yellow",
-    text: "One wallet for all your crypto.",
+    text: "Focus on opportunities, not fees.",
     pillText: "Convenient",
     icon: <Smile className="w-8 h-8 text-black" />,
   },
   {
     color: "pink",
-    text: "Using your social account or Google.",
+    text: "One wallet for all your crypto.",
     pillText: "Multichain",
     icon: <Settings className="w-8 h-8 text-black" />,
   },
@@ -45,6 +46,29 @@ const rightCards = [
 ];
 
 export default function FeaturesSection() {
+  const { phase } = useAnimation();
+
+  // Video box animation triggered by button phase from animation context
+  useEffect(() => {
+    if (phase === "button") {
+      // Animate the video box from bottom to center when button phase is triggered
+      const videoBoxTimeline = createTimeline({
+        autoplay: true,
+        defaults: {
+          duration: 800,
+          ease: "outCubic",
+        },
+      });
+
+      videoBoxTimeline.add(".video-container", {
+        translateY: [{ from: "100vh", to: "0vh" }],
+        opacity: [{ from: 0, to: 1 }],
+        scale: [{ from: 0.85, to: 1 }],
+      });
+    }
+  }, [phase]);
+
+  // Scroll-based animations
   useEffect(() => {
     const featuresScrollTimeline = createTimeline({
       autoplay: onScroll({
@@ -59,13 +83,11 @@ export default function FeaturesSection() {
       },
     });
 
-    // --- Stage 1: Video appears and centers ---
+    // --- Stage 1: Video container is already positioned (no animation needed) ---
     featuresScrollTimeline.add(".video-container", {
-      translateY: [{ from: "100vh", to: "0vh" }],
-      opacity: [{ from: 0, to: 1 }],
-      scale: [{ from: 0.85, to: 1 }],
-      duration: 2200,
-      ease: "outQuart",
+      translateY: [{ from: "0vh", to: "0vh" }], // Hold position
+      duration: 200,
+      ease: "linear",
     });
 
     // --- Stage 1.5: Hold video ---
@@ -180,7 +202,7 @@ export default function FeaturesSection() {
             duration: 1200,
             ease: "inOutCubic",
           },
-          "-=1000"
+          "-=1800"
         )
         // Right card fades/moves up at the same time
         .add(
@@ -226,7 +248,7 @@ export default function FeaturesSection() {
   }, []);
 
   return (
-    <section className="features-scroll-wrapper pt-24 relative w-full h-[800vh] bg-white z-40">
+    <section className="features-scroll-wrapper pt-20 relative w-full h-[800vh] bg-[#FFFFFF] z-40">
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden z-40">
         <div className="features-layout w-full h-full flex items-center justify-center">
           <div className="relative">
@@ -285,7 +307,7 @@ export default function FeaturesSection() {
             {leftCards.map((card, index) => (
               <div
                 key={index}
-                className={`left-card-${index} opacity-0 z-10 w-[21.5rem] absolute`}
+                className={`left-card-${index} opacity-0 z-10 w-[22rem] absolute`}
                 style={{
                   transform: "translateY(100vh)",
                   left: "-600px",
@@ -301,7 +323,7 @@ export default function FeaturesSection() {
                     text={card.text}
                     icon={card.icon}
                     pillText={card.pillText}
-                    className="p-6 text-3xl font-bold"
+                    className="p-6 text-4xl"
                   />
                 </div>
               </div>

@@ -35,7 +35,7 @@ export function InfoCard({
       {/* Optional Video */}
       {videoSrc && (
         <video
-          className="absolute bottom-0 left-0 right-0 w-full h-[59%] object-cover z-0"
+          className="absolute bottom-0 left-0 right-0 w-full h-[65%] object-cover z-0"
           autoPlay
           loop
           muted
