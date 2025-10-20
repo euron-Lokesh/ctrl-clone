@@ -20,7 +20,7 @@ export default function Header() {
       animate(headerRef.current, {
         translateY: { from: -100, to: 0 },
         opacity: { from: 0, to: 1 },
-        duration: 800,
+        duration: 500,
         ease: "outCubic",
         complete: () => {
           setPhase("button");
@@ -117,7 +117,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 left-0 right-0 z-50 bg-[#FAFAFA]"
+      className="fixed top-0 left-0 right-0 z-50"
       style={{ opacity: 0, transform: "translateY(-100px)" }}
     >
       <nav className="max-w-[90rem] mx-auto px-6 md:px-8 py-8 flex items-center justify-between">

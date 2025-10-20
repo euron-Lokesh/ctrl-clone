@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { Send, Globe, Github, MessageCircle } from "lucide-react";
+import { Globe, MessageCircle, Github, Send } from "lucide-react";
 import { createTimeline } from "animejs";
+import Link from "next/link";
 
 const Footer = () => {
   const footerRef = useRef<HTMLDivElement>(null);
@@ -11,16 +12,13 @@ const Footer = () => {
     const element = footerRef.current;
     if (!element) return;
 
-    // Observe when footer comes into view
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          const timeline = createTimeline({
-            autoplay: true,
-          });
+          const timeline = createTimeline({ autoplay: true, });
 
-          // Dot slide animation
           timeline
+            // Dot slide
             .add(
               ".footer-dot",
               {
@@ -34,7 +32,7 @@ const Footer = () => {
             .add(
               ".footer-dot",
               {
-                left: [{ to: "calc(100% + 60px)", duration: 600 }],
+                left: [{ to: "calc(45% + 10px)", duration: 600 }],
                 easing: "easeOutBack(1.2)",
               },
               "-=100"
@@ -62,113 +60,130 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className="w-full bg-white text-black flex flex-col items-center py-32 px-8 md:px-52 font-sans border-t border-gray-200 overflow-hidden"
+      className="w-full  bg-white text-black flex flex-col items-center pt-28 pb-20 px-6 md:px-24 font-sans overflow-hidden"
     >
-      {/* Newsletter Section */}
-      <div className="text-center mb-24">
-        <h2 className="text-2xl font-semibold">Newsletter</h2>
-        <p className="text-gray-500 mt-2">
+      {/* === Newsletter Section === */}
+      <div className="w-full max-w-5xl px-40 text-start  mb-16">
+        <h2 className="text-3xl font-medium text-gray-800">Newsletter</h2>
+        <p className="text-gray-500 mb-8">
           Subscribe to our amazing newsletter to receive all the latest news &
           updates.
         </p>
 
-        <div className="flex items-center justify-center mt-8">
+        <div className="flex flex-col items-center gap-6">
           <input
             type="email"
             placeholder="Your email address"
-            className="w-[30rem] max-w-full px-8 py-4 rounded-full border border-black text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full md:w-[49rem] text-xl px-8 py-6 rounded-full border-2 border-black text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black"
           />
-        </div>
-
-        <button className="mt-6 bg-black text-white px-10 py-3 rounded-full text-lg font-medium hover:opacity-90 transition flex items-center gap-2 mx-auto">
-          <Send size={18} />
-          Subscribe
-        </button>
-      </div>
-
-      {/* Animated Take Ctrl */}
-      <div className="relative float-left">
-        {/* Dot animation element */}
-        <div
-          className="footer-dot opacity-0 absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[50px] h-[50px] rounded-full bg-black"
-          style={{ opacity: 0 }}
-        />
-        <div
-          className="footer-textReveal font-medium leading-[100%] text-[10rem] md:text-[14rem] text-black w-full flex justify-center align-middle"
-          style={{ clipPath: "inset(0% 100% 0% 0%)" }}
-        >
-          Take&nbsp;Ctrl
+          <button className="bg-black text-white px-10 py-3 rounded-full text-lg font-medium hover:opacity-90 transition flex items-center gap-2 justify-center">
+            Subscribe <Send size={18} />
+          </button>
         </div>
       </div>
 
-      {/* Social Links */}
-      <div className="flex gap-6 mb-20">
-        <a
-          href="#"
-          className="border border-black rounded-full p-4 hover:bg-black hover:text-white transition"
-        >
-          <Globe size={22} />
-        </a>
-        <a
-          href="#"
-          className="border border-black rounded-full p-4 hover:bg-black hover:text-white transition"
-        >
-          <MessageCircle size={22} />
-        </a>
-        <a
-          href="#"
-          className="border border-black rounded-full p-4 hover:bg-black hover:text-white transition"
-        >
-          <Github size={22} />
-        </a>
+      <div className="w-full px-20">
+        {/* === Take Ctrl Animation === */}
+        <div className="relative mb-24">
+          <div
+            className="footer-dot absolute bottom-[8%] left-1/2 -translate-x-1/2 w-[50px] h-[50px] rounded-full bg-black opacity-0"
+            style={{ opacity: 0 }}
+          />
+          <div
+            className="footer-textReveal font-medium leading-[90%] text-[10rem] text-black w-full flex  items-center"
+            style={{ clipPath: "inset(0% 100% 0% 0%)" }}
+          >
+            Level&nbsp;up
+          </div>
+        </div>
+
+        {/* === Footer Navigation === */}
+        <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between items-center md:items-start gap-16 md:gap-0 text-center md:text-left">
+          {/* Left - Social Icons */}
+          <div className="flex gap-5 md:gap-6">
+            <Link
+              href="#"
+              className="border border-black rounded-full p-3 hover:bg-black hover:text-white transition"
+            >
+              <Globe size={22} />
+            </Link>
+            <Link
+              href="#"
+              className="border border-black rounded-full p-3 hover:bg-black hover:text-white transition"
+            >
+              <MessageCircle size={22} />
+            </Link>
+            <Link
+              href="#"
+              className="border border-black rounded-full p-3 hover:bg-black hover:text-white transition"
+            >
+              <MessageCircle size={22} />
+            </Link>
+            <Link
+              href="#"
+              className="border border-black rounded-full p-3 hover:bg-black hover:text-white transition"
+            >
+              <Github size={22} />
+            </Link>
+          </div>
+
+          {/* Middle - Links Grid */}
+          <div className="grid grid-cols-3 gap-12">
+            {/* Product */}
+            <div className="flex flex-col gap-2">
+              <h3 className="font-semibold text-lg mb-1">Product</h3>
+              <a href="#" className="text-gray-700 hover:text-black">
+                Security
+              </a>
+              <a href="#" className="text-gray-700 hover:text-black">
+                Support
+              </a>
+            </div>
+
+            {/* Company */}
+            <div className="flex flex-col gap-2">
+              <h3 className="font-semibold text-lg mb-1">Company</h3>
+              <a href="#" className="text-gray-700 hover:text-black">
+                Introducing Ctrl
+              </a>
+              <a href="#" className="text-gray-700 hover:text-black">
+                $CTRL
+              </a>
+              <a href="#" className="text-gray-700 hover:text-black">
+                About
+              </a>
+            </div>
+
+            {/* Resources */}
+            <div className="flex flex-col gap-2">
+              <h3 className="font-semibold text-lg mb-1">Resources</h3>
+              <a href="#" className="text-gray-700 hover:text-black">
+                News
+              </a>
+              <a href="#" className="text-gray-700 hover:text-black">
+                Docs
+              </a>
+              <a href="#" className="text-gray-700 hover:text-black">
+                Media Kit
+              </a>
+              <a href="#" className="text-gray-700 hover:text-black">
+                Shortcuts
+              </a>
+            </div>
+          </div>
+
+          {/* Right - Language */}
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <h3 className="font-semibold text-lg flex items-center gap-1">
+              <Globe size={18} /> English
+            </h3>
+          </div>
+        </div>
       </div>
-
-      {/* Footer Links */}
-      <div className="w-full flex flex-col md:flex-row justify-center md:justify-between items-center text-center md:text-left gap-y-10">
-        <div className="flex flex-col gap-2">
-          <h3 className="font-semibold text-lg">Product</h3>
-          <a href="#" className="text-gray-700 hover:text-black">
-            Security
-          </a>
-          <a href="#" className="text-gray-700 hover:text-black">
-            Support
-          </a>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <h3 className="font-semibold text-lg">Company</h3>
-          <a href="#" className="text-gray-700 hover:text-black">
-            Introducing Ctrl
-          </a>
-          <a href="#" className="text-gray-700 hover:text-black">
-            $CTRL
-          </a>
-          <a href="#" className="text-gray-700 hover:text-black">
-            About
-          </a>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <h3 className="font-semibold text-lg">Resources</h3>
-          <a href="#" className="text-gray-700 hover:text-black">
-            News
-          </a>
-          <a href="#" className="text-gray-700 hover:text-black">
-            Docs
-          </a>
-          <a href="#" className="text-gray-700 hover:text-black">
-            Media Kit
-          </a>
-          <a href="#" className="text-gray-700 hover:text-black">
-            Shortcuts
-          </a>
-        </div>
-
-        <div className="flex flex-col items-center md:items-end gap-2">
-          <h3 className="font-semibold text-lg flex items-center gap-1">
-            <Globe size={18} /> English
-          </h3>
-        </div>
+      <div className="flex text-xs text-center mt-60 mb-5 items-center gap-x-3">
+        <p>Terms of use</p>
+        <p>Terms of use</p>
+        <p>Terms of use</p>
       </div>
     </footer>
   );
