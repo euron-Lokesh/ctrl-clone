@@ -15,38 +15,82 @@ const Footer = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          const timeline = createTimeline({ autoplay: true, });
+          // Set initial dot state - visible and at left position
+          const dot = element.querySelector(".footer-dot") as HTMLElement;
+          const textElement = element.querySelector(
+            ".footer-textReveal"
+          ) as HTMLElement;
+          if (dot) {
+            dot.style.opacity = "1";
+            dot.style.left = "0%";
+          }
 
-          timeline
-            // Dot slide
-            .add(
-              ".footer-dot",
-              {
-                left: [{ from: "50%", to: "0%" }],
-                opacity: [0, 1],
-                duration: 300,
-                easing: "easeInOutQuad",
+          let isLevelUp = true; // Track which text to show
+
+          const createCycle = () => {
+            // Update text content before animation starts
+            if (textElement) {
+              textElement.textContent = isLevelUp ? "Level up" : "Take Ctrl";
+            }
+
+            const timeline = createTimeline({
+              autoplay: true,
+              onComplete: () => {
+                // Toggle text for next cycle and restart
+                isLevelUp = !isLevelUp;
+                setTimeout(() => createCycle(), 0);
               },
-              200
-            )
-            .add(
-              ".footer-dot",
-              {
-                left: [{ to: "calc(45% + 10px)", duration: 600 }],
-                easing: "easeOutBack(1.2)",
-              },
-              "-=100"
-            )
-            // Text reveal
-            .add(
-              ".footer-textReveal",
-              {
-                clipPath: ["inset(0% 100% 0% 0%)", "inset(0% 0% 0% 0%)"],
-                duration: 600,
-                easing: "easeOutQuad",
-              },
-              "<<"
-            );
+            });
+
+            // Animation sequence
+            timeline
+              // 1. REVEAL: Dot moves from left to end + Text reveals
+              .add(
+                ".footer-dot",
+                {
+                  left: [{ from: "0%", to: "calc(100% + 40px)" }],
+                  ease: "outBack(1.2)",
+                  duration: 600,
+                },
+                0
+              )
+              .add(
+                ".footer-textReveal",
+                {
+                  clipPath: ["inset(0% 100% 0% 0%)", "inset(0% 0% 0% 0%)"],
+                  duration: 600,
+                },
+                0
+              )
+
+              // 2. HOLD: Stay revealed for 3 seconds
+              .add({}, { duration: 3000 }, 600)
+
+              // 3. HIDE: Text hide + Dot moves back (starts at 3600ms)
+              .add(
+                ".footer-textReveal",
+                {
+                  clipPath: ["inset(0% 0% 0% 0%)", "inset(0% 100% 0% 0%)"],
+                  duration: 600,
+                },
+                3600
+              )
+              .add(
+                ".footer-dot",
+                {
+                  left: [{ from: "calc(100% + 40px)", to: "0%" }],
+                  ease: "inOut",
+                  duration: 600,
+                },
+                3600
+              )
+
+              // 4. PAUSE: 2 seconds before next cycle
+              .add({}, { duration: 2000 });
+          };
+
+          // Start the animation cycle
+          createCycle();
 
           observer.disconnect();
         }
@@ -55,6 +99,8 @@ const Footer = () => {
     );
 
     observer.observe(element);
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -83,17 +129,16 @@ const Footer = () => {
       </div>
 
       <div className="w-full px-20">
-        {/* === Take Ctrl Animation === */}
-        <div className="relative mb-24">
-          <div
-            className="footer-dot absolute bottom-[8%] left-1/2 -translate-x-1/2 w-[50px] h-[50px] rounded-full bg-black opacity-0"
-            style={{ opacity: 0 }}
-          />
-          <div
-            className="footer-textReveal font-medium leading-[90%] text-[10rem] text-black w-full flex  items-center"
-            style={{ clipPath: "inset(0% 100% 0% 0%)" }}
-          >
-            Level&nbsp;up
+        {/* === Level Up Animation (Matching Hero Structure) === */}
+        <div className="relative w-full h-full flex items-center justify-start mb-24">
+          <div className="relative text-center overflow-visible">
+            <div className="footer-dot opacity-0 absolute bottom-[10%] left-1/2 font-[Tomato Grotesk,Arial,sans-serif] -translate-x-1/2 w-[25px] h-[25px] rounded-full bg-black" />
+            <div
+              className="footer-textReveal font-medium leading-[100%] text-[160px] text-black w-full flex justify-center align-middle"
+              style={{ clipPath: "inset(0% 100% 0% 0%)" }}
+            >
+              Level&nbsp;up
+            </div>
           </div>
         </div>
 
