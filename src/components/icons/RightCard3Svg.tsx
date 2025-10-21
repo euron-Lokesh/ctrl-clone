@@ -1,10 +1,9 @@
-import React from "react";
-
+// RightCard3Svg Component
 interface RightCard3SvgProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string; // optional prop to set width & height
+  size?: number | string;
 }
 
-const RightCard3Svg: React.FC<RightCard3SvgProps> = ({
+export const RightCard3Svg: React.FC<RightCard3SvgProps> = ({
   size = 100,
   width,
   height,
@@ -110,5 +109,3 @@ const RightCard3Svg: React.FC<RightCard3SvgProps> = ({
     </g>
   </svg>
 );
-
-export default RightCard3Svg;

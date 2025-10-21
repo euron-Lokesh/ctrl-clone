@@ -100,39 +100,8 @@ export default function HeroSection({
             "<<+200"
           );
       }
-
-      // Button animation removed from here - will be handled in separate phase
     }
   }, [phase, BadgeIcon, setPhase]);
-
-  // Handle button animation separately when header is done
-  // useEffect(() => {
-  //   if (phase === "button") {
-  //     const timeline = createTimeline({
-  //       autoplay: true,
-  //     });
-
-  //     // Button expansion animation - width grows from icon size to full size
-  //     timeline
-  //       .add(".hero-button", {
-  //         scaleX: [0.2, 1], // Start narrow (icon width), expand to full width
-  //         opacity: [0, 1],
-  //         duration: 600,
-  //         ease: "outCubic",
-  //       })
-  //       // Text slides up from bottom to center simultaneously
-  //       .add(
-  //         ".button-text",
-  //         {
-  //           translateY: [20, 0], // Slide up from below
-  //           opacity: [0, 1],
-  //           duration: 400,
-  //           ease: "outQuad",
-  //         },
-  //         "-=400" // Start 200ms before button expansion finishes
-  //       );
-  //   }
-  // }, [phase]);
 
   // Split text logic
   const renderText = () => {
@@ -179,33 +148,6 @@ export default function HeroSection({
             </div>
           </div>
         </div>
-
-        {/* Download button with special animation structure */}
-        {/* <div
-          className="flex justify-center mt-16 hero-button"
-          style={{
-            opacity: 0,
-            transformOrigin: "center",
-            transform: "scaleX(0.2)", // Start narrow (icon width only)
-          }}
-        >
-          <Button
-            icon={<ChromeIcon size={40} />}
-            className="relative overflow-hidden"
-          >
-            <span
-              className="button-text inline-block"
-              style={{
-                opacity: 0,
-                transform: "translateY(20px)",
-              }}
-            >
-              Download for Chrome
-            </span>
-          </Button>
-        </div> */}
-
-        {/* <div className="h-40"></div> */}
       </div>
     </section>
   );

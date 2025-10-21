@@ -6,8 +6,8 @@ import { ColoredCard } from "../ui/ColoredCard";
 import { InfoCard } from "../ui/InfoCard";
 // import RightCard1Svg from "../icons/RightCard1Svg";
 // import RightCard2Svg from "../icons/RightCard2Svg";
-import RightCard3Svg from "../icons/RightCard3Svg";
 import { useAnimation } from "@/context/AnimationContext";
+import { RightCard3Svg } from "../icons/RightCard3Svg";
 
 const leftCards = [
   {
@@ -90,12 +90,35 @@ export default function FeaturesSection() {
       ease: "linear",
     });
 
+    // --- Fade out Hero text as video begins moving up ---
+    featuresScrollTimeline.add(
+      [".top-text", ".textReveal", ".dot"], // target both lines
+      {
+        opacity: [{ from: 1, to: 0 }],
+        duration: 800,
+        ease: "inOutQuad",
+      },
+      1500 // start right after initial hold
+    );
+
     // --- Stage 1.5: Hold video ---
     featuresScrollTimeline.add(".video-container", {
       translateY: [{ from: "0vh", to: "0vh" }],
       duration: 1600,
       ease: "linear",
     });
+
+    // --- Fade out Hero text exactly as video starts rising ---
+    featuresScrollTimeline.add(
+      [".top-text", ".textReveal"], // hero texts
+      {
+        opacity: [{ from: 1, to: 0 }],
+        translateY: [{ from: "0px", to: "-40px" }],
+        duration: 1000,
+        ease: "inOutQuad",
+      },
+      "+=0" // starts exactly when video begins to move up
+    );
 
     // --- Stage 2: Cards & videos in sequence ---
     leftCards.forEach((card, index) => {
