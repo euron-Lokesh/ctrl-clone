@@ -11,7 +11,6 @@ const OverviewHorizontalFeatureCard: React.FC<
 > = ({ title, description, videoSrc }) => {
   return (
     <div className="bg-[#F9FAF9] flex justify-center flex-nowrap items-center gap-x-24 mx-64 p-28 rounded-2xl">
-      {/* Left Side - Text */}
       <div>
         <div className="space-y-8">
           <h1 className="text-[1.5rem] lg:text-[2.4rem] xl:text-[2.8rem] 2xl:text-[3.3rem]  text-black leading-[0.85] tracking-[-0.02em]">
@@ -24,7 +23,6 @@ const OverviewHorizontalFeatureCard: React.FC<
         </div>
       </div>
 
-      {/* Right Side - Video */}
       <video className="w-60 h-60 object-cover" autoPlay loop muted playsInline>
         <source src={videoSrc} type="video/mp4" />
       </video>

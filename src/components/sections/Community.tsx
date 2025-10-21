@@ -46,7 +46,6 @@ const Community = () => {
       ".trust-text"
     ) as HTMLElement;
 
-    // Initial states for header animations
     const setInitial = (el: HTMLElement | null, transform: string) => {
       if (el) {
         el.style.opacity = "0";
@@ -64,7 +63,6 @@ const Community = () => {
       handElement.style.transformOrigin = "center center";
     }
 
-    // Observe and animate header only
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -145,7 +143,6 @@ const Community = () => {
 
   return (
     <div ref={communityRef} className="w-full mt-32 px-52 py-20 bg-[#F9FAF9]">
-      {/* Header */}
       <div className="flex justify-end">
         <span className="text-5xl font-semibold mr-96 rounded-full level-up-text">
           <span className="text-red-600">. </span>
@@ -153,7 +150,6 @@ const Community = () => {
         </span>
       </div>
 
-      {/* Main Content */}
       <div ref={mainContentRef} className="text-center w-full mt-10">
         <div className="flex items-center justify-center text-[6rem] leading-[0.3]">
           <span className="join-the-text">Join the</span>
@@ -170,7 +166,6 @@ const Community = () => {
         </p>
       </div>
 
-      {/* Static Cards (No animation) */}
       <div className="flex justify-center gap-x-10 mt-20 h-[36rem]">
         {CommunityDetails.map((card, index) => (
           <ColoredCard

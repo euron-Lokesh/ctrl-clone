@@ -1,4 +1,3 @@
-// ColoredCard.tsx
 interface ColoredCardProps {
   color: string;
   text: string;
@@ -35,15 +34,13 @@ export function ColoredCard({
       }}
       className={`h-full rounded-2xl relative ${className}`}
     >
-      {/* Icon and text at top */}
       <div className="flex items-start gap-x-2 justify-between mb-4">
         <h3 className="text-black leading-tight flex-1 pr-4">{text}</h3>
         <div className="text-black flex-shrink-0">{icon}</div>
       </div>
 
-      {/* Pill at bottom - absolute positioned */}
       {pillText && (
-        <div className="absolute bottom-6   left-6">
+        <div className="absolute bottom-6 left-6">
           <span
             style={{
               backgroundColor: pillColors[color as keyof typeof pillColors],

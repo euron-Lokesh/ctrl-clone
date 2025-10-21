@@ -14,23 +14,18 @@ export default function FloatingDownloadBtn() {
   const [isCompact, setIsCompact] = useState(false);
   const [hasExpandedAtBottom, setHasExpandedAtBottom] = useState(false);
 
-  // Function to get responsive top position with increased spacing
   const getResponsiveTopPosition = () => {
     const screenHeight = window.innerHeight;
 
     if (screenHeight <= 768) {
-      // Small screens - increased spacing by 50px
       return screenHeight - 200;
     } else if (screenHeight <= 900) {
-      // Medium screens - increased spacing by 50px
       return screenHeight - 300;
     } else {
-      // Large screens - increased spacing by 50px
       return screenHeight - 350;
     }
   };
 
-  // 🟢 Initial hero animation (button appears)
   useEffect(() => {
     if (phase === "button" && wrapperRef.current && textRef.current) {
       const tl = createTimeline({ autoplay: true });
@@ -53,7 +48,6 @@ export default function FloatingDownloadBtn() {
     }
   }, [phase]);
 
-  // 🧠 Scroll-based animation with responsive positioning
   useEffect(() => {
     const handleScroll = () => {
       const btn = wrapperRef.current;
@@ -64,13 +58,11 @@ export default function FloatingDownloadBtn() {
       const maxScroll = 600;
       const progress = Math.min(scrollY / maxScroll, 1);
 
-      // ✅ Detect when reaching bottom
       const atBottom =
         window.innerHeight + window.scrollY >= document.body.scrollHeight - 100;
 
-      // ✅ Responsive motion calculation
       const topStart = getResponsiveTopPosition();
-      const topEnd = window.innerHeight - 120; // where it settles at bottom
+      const topEnd = window.innerHeight - 120;
       const currentTop = topStart + (topEnd - topStart) * progress;
 
       btn.style.position = "fixed";
@@ -79,7 +71,6 @@ export default function FloatingDownloadBtn() {
       btn.style.top = `${currentTop}px`;
       btn.style.zIndex = "50";
 
-      // 🔽 Hide text and shrink width (scroll down)
       if (scrollY > 0 && !isCompact && !atBottom) {
         setIsCompact(true);
 
@@ -102,7 +93,6 @@ export default function FloatingDownloadBtn() {
         setHasExpandedAtBottom(false);
       }
 
-      // 🔼 Expand and show text when scrolled to top
       if (scrollY === 0 && isCompact) {
         setIsCompact(false);
         text.style.display = "inline-block";
@@ -121,26 +111,22 @@ export default function FloatingDownloadBtn() {
         });
       }
 
-      // 📌 Fix to bottom after scroll progress 1
       if (progress === 1 && !isAtBottom) {
         btn.style.top = "auto";
         setIsAtBottom(true);
       }
 
-      // ✅ Smooth upward lift + expand when reaching bottom
       if (atBottom && isCompact && !hasExpandedAtBottom) {
         setIsCompact(false);
         setHasExpandedAtBottom(true);
         text.style.display = "inline-block";
 
-        // 1️⃣ Move upward slightly
         animate(btn, {
           translateY: { from: 0, to: -120 },
           duration: 1000,
           ease: "outCubic",
         });
 
-        // 2️⃣ Expand smoothly
         animate(btn, {
           width: { from: 90, to: 320 },
           duration: 1000,
@@ -148,7 +134,6 @@ export default function FloatingDownloadBtn() {
           ease: "outBack(1.2)",
         });
 
-        // 3️⃣ Fade text in
         animate(text, {
           translateY: { from: 10, to: 0 },
           opacity: { from: 0, to: 1 },
@@ -158,13 +143,11 @@ export default function FloatingDownloadBtn() {
         });
       }
 
-      // 🔁 Smooth reverse when scrolling up from bottom
       if (!atBottom && isAtBottom && hasExpandedAtBottom) {
         setHasExpandedAtBottom(false);
         setIsAtBottom(false);
         btn.style.bottom = "auto";
 
-        // 🟢 Smooth shrink and fade out text
         animate(btn, {
           width: { from: 320, to: 90 },
           duration: 600,
@@ -184,12 +167,10 @@ export default function FloatingDownloadBtn() {
       }
     };
 
-    // Handle resize to recalculate position
     const handleResize = () => {
       const btn = wrapperRef.current;
       if (!btn) return;
 
-      // Update initial position based on new screen size
       if (window.scrollY === 0) {
         const newTop = getResponsiveTopPosition();
         btn.style.top = `${newTop}px`;
@@ -205,10 +186,8 @@ export default function FloatingDownloadBtn() {
     };
   }, [isAtBottom, isCompact, hasExpandedAtBottom]);
 
-  // State for initial position to avoid hydration mismatch
   const [initialPosition, setInitialPosition] = useState("calc(100vh - 350px)");
 
-  // Set responsive position after component mounts with increased spacing
   useEffect(() => {
     const updatePosition = () => {
       const screenHeight = window.innerHeight;
@@ -243,7 +222,6 @@ export default function FloatingDownloadBtn() {
         height: "64px",
       }}
     >
-      {/* 🌿 Pure Button UI */}
       <button
         ref={btnRef}
         className="w-full h-full flex items-center justify-center gap-3 bg-[#02C92F] border-2 border-black rounded-full font-medium text-black relative overflow-hidden"
