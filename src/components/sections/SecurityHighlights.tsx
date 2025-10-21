@@ -231,8 +231,8 @@ const SecurityHighlights: React.FC = () => {
         <div ref={headerRef} className="px-28 section-header mb-20 text-center">
           <div className="flex justify-end">
             <span className="text-4xl mr-96 rounded-full font-semibold secure-text">
-              <span className="text-green-600 green-dot">. </span>
-              <span className="text-black">Secure and private</span>
+              <span className="text-green-600">. </span>
+              <span className="text-black"> Secure and private</span>
             </span>
           </div>
 
