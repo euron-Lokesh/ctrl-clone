@@ -1,8 +1,6 @@
 "use client";
 import { createTimeline } from "animejs";
 import { useEffect, useRef } from "react";
-// import ChromeIcon from "../icons/ChromeIcon";
-// import Button from "../ui/Button";
 import { useAnimation } from "@/context/AnimationContext";
 
 interface HeroSectionProps {
@@ -21,26 +19,21 @@ export default function HeroSection({
   const root = useRef(null);
   const { phase, setPhase } = useAnimation();
 
-  // Auto-start animation when component mounts
   useEffect(() => {
     if (phase === "idle") {
-      // Small delay to ensure everything is rendered
       setTimeout(() => setPhase("hero"), 100);
     }
   }, [phase, setPhase]);
 
-  // Run hero animation when phase changes to 'hero'
   useEffect(() => {
     if (phase === "hero") {
       const timeline = createTimeline({
         autoplay: true,
         onComplete: () => {
-          // Move to header phase when hero content completes (without button)
           setPhase("header");
         },
       });
 
-      // Top text animation
       timeline
         .add(
           ".top-text",
@@ -57,25 +50,24 @@ export default function HeroSection({
           {
             left: [{ from: "50%", to: "0%" }],
             ease: "inOut",
-            duration: 300, // Changed from 400 to 200 (2x faster)
+            duration: 300,
             opacity: 1,
           },
           "-=100"
         )
         .add(".dot", {
-          left: [{ to: "calc(100% + 80px)", duration: 600 }], // Changed from 900 to 400 (2.25x faster)
+          left: [{ to: "calc(100% + 80px)", duration: 600 }],
           ease: "outBack(1.2)",
         })
         .add(
           ".textReveal",
           {
             clipPath: ["inset(0% 100% 0% 0%)", "inset(0% 0% 0% 0%)"],
-            duration: 600, // Changed from 900 to 400 (2.25x faster)
+            duration: 600,
           },
           "<<"
         );
 
-      // Badge animation if provided
       if (BadgeIcon) {
         timeline
           .add(".wordTake", {
@@ -103,7 +95,6 @@ export default function HeroSection({
     }
   }, [phase, BadgeIcon, setPhase]);
 
-  // Split text logic
   const renderText = () => {
     if (BadgeIcon && text.includes("Take") && text.includes("Ctrl")) {
       return (

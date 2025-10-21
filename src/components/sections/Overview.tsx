@@ -4,7 +4,6 @@ import { createTimeline } from "animejs";
 import OverviewHorizontalFeatureCard from "../ui/OverviewHorizontalFeatureCard";
 import { RightCard3Svg } from "../icons/RightCard3Svg";
 
-// Feature data
 const overviewFeatures = [
   {
     title: "10M+ assets at your fingertips",
@@ -26,7 +25,6 @@ const overviewFeatures = [
   },
 ];
 
-// Main Overview Component
 const Overview: React.FC = () => {
   const overviewRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
@@ -40,7 +38,6 @@ const Overview: React.FC = () => {
     )
       return;
 
-    // Initialize all elements with starting positions
     const levelUpElement = heroTextRef.current.querySelector(
       ".level-up-text"
     ) as HTMLElement;
@@ -51,7 +48,6 @@ const Overview: React.FC = () => {
       ".hero-icon"
     ) as HTMLElement;
 
-    // Set initial states
     if (levelUpElement) {
       levelUpElement.style.opacity = "0";
       levelUpElement.style.transform = "translateX(200px)";
@@ -67,7 +63,6 @@ const Overview: React.FC = () => {
       heroIcon.style.transform = "translateY(80px) scale(0.8)";
     }
 
-    // Initialize card states
     overviewFeatures.forEach((_, index) => {
       const cardElement = overviewRef.current?.querySelector(
         `.overview-card-${index}`
@@ -80,14 +75,12 @@ const Overview: React.FC = () => {
       }
     });
 
-    // Hero entrance animation observer
     const heroObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const timeline = createTimeline({ autoplay: true });
 
-            // Level up text slides in from right
             timeline.add(".level-up-text", {
               translateX: [{ from: "200px", to: "0px" }],
               opacity: [{ from: 0, to: 1 }],
@@ -95,7 +88,6 @@ const Overview: React.FC = () => {
               ease: "outExpo",
             });
 
-            // Main hero text lines stagger up (like a typewriter effect)
             timeline.add(
               ".hero-text-line",
               {
@@ -103,12 +95,11 @@ const Overview: React.FC = () => {
                 opacity: [{ from: 0, to: 1 }],
                 duration: 1200,
                 ease: "outExpo",
-                delay: (_, index) => index * 200, // Stagger each line
+                delay: (_, index) => index * 200,
               },
               "-=600"
-            ); // Start while level up is still animating
+            );
 
-            // Hero icon animates in with the second line
             timeline.add(
               ".hero-icon",
               {
@@ -119,7 +110,7 @@ const Overview: React.FC = () => {
                 ease: "outExpo",
               },
               "-=800"
-            ); // Sync with the second hero text line
+            );
 
             heroObserver.unobserve(entry.target);
           }
@@ -131,7 +122,6 @@ const Overview: React.FC = () => {
       }
     );
 
-    // Card scroll animation observer
     const cardObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -163,12 +153,10 @@ const Overview: React.FC = () => {
       }
     );
 
-    // Observe hero section for entrance animations
     if (heroTextRef.current) {
       heroObserver.observe(heroTextRef.current);
     }
 
-    // Observe card elements
     overviewFeatures.forEach((_, index) => {
       const cardElement = overviewRef.current?.querySelector(
         `.overview-card-${index}`
@@ -178,7 +166,6 @@ const Overview: React.FC = () => {
       }
     });
 
-    // Cleanup
     return () => {
       cardObserver.disconnect();
       heroObserver.disconnect();
@@ -191,13 +178,11 @@ const Overview: React.FC = () => {
       className="min-h-screen bg-white"
       style={{ perspective: "1000px" }}
     >
-      {/* Hero Section */}
       <div className="min-h-screen flex items-center justify-center overflow-hidden">
         <div
           className="w-full max-w-screen-2xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20"
           ref={heroTextRef}
         >
-          {/* Level up text */}
           <div className="flex justify-end mr-60 mb-4 sm:mb-6 md:mb-8">
             <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl level-up-text">
               <span className="text-green-600">. </span>
@@ -205,16 +190,12 @@ const Overview: React.FC = () => {
             </span>
           </div>
 
-          {/* Main hero text */}
           <div className="font-medium font-serif space-y-1 sm:space-y-2 md:space-y-3 flex flex-col items-center">
-            {/* All text lines in a left-aligned container that's centered */}
             <div className="text-left">
-              {/* Capture every */}
               <h1 className="leading-[0.9] text-4xl sm:text-5xl md:text-6xl lg:text-7xl  xl:text-[11rem] hero-text-line">
                 Capture every
               </h1>
 
-              {/* opportunity + icon */}
               <div className="flex items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8">
                 <h1 className="leading-[0.9] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[11rem] tracking-tight hero-text-line">
                   opportunity
@@ -224,7 +205,6 @@ const Overview: React.FC = () => {
                 </div>
               </div>
 
-              {/* on every chain */}
               <h1 className="leading-[1.2] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[11rem] hero-text-line">
                 on every chain.
               </h1>
@@ -233,7 +213,6 @@ const Overview: React.FC = () => {
         </div>
       </div>
 
-      {/* Feature Cards */}
       <div
         ref={cardsContainerRef}
         className="flex flex-col space-y-16 pb-16"

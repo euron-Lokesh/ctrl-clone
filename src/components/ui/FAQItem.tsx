@@ -29,7 +29,6 @@ export default function FAQItem({
 
         <div className="relative flex-shrink-0 w-12 h-12 md:w-14 md:h-14">
           <div className="absolute inset-0 rounded-full border-[3px] border-black bg-transparent group-hover:bg-black transition-all duration-500 ease-out" />
-
           <div className="absolute inset-0 flex items-center justify-center">
             <svg
               width="24"

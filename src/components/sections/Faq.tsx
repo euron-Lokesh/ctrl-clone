@@ -21,12 +21,12 @@ export default function FAQSection() {
     {
       question: "Can I migrate my MetaMask, Phantom or Keplr wallet to Ctrl?",
       answer:
-        "Yes, you can import your existing wallets such as MetaMask, Phantom, or Keplr into Ctrl using your recovery phrase or private key. This keeps your assets and wallet addresses the same while benefiting from Ctrl’s features.",
+        "Yes, you can import your existing wallets such as MetaMask, Phantom, or Keplr into Ctrl using your recovery phrase or private key. This keeps your assets and wallet addresses the same while benefiting from Ctrl's features.",
     },
     {
       question: "How do I connect to a dapp if I don't see the Ctrl logo?",
       answer:
-        "If the dapp doesn’t display the Ctrl logo, select the ‘WalletConnect’ option or a similar connection method. Ctrl supports WalletConnect, allowing you to link your wallet with most Web3 applications easily.",
+        "If the dapp doesn't display the Ctrl logo, select the 'WalletConnect' option or a similar connection method. Ctrl supports WalletConnect, allowing you to link your wallet with most Web3 applications easily.",
     },
     {
       question: "What is a non-custodial wallet?",
@@ -37,7 +37,7 @@ export default function FAQSection() {
       question:
         "XDEFI migrated to Ctrl. What does this mean for me as an XDEFI user?",
       answer:
-        "The migration means all XDEFI Wallet users can seamlessly move to Ctrl. You’ll retain your wallet, assets, and networks while gaining access to Ctrl’s new features and improved performance.",
+        "The migration means all XDEFI Wallet users can seamlessly move to Ctrl. You'll retain your wallet, assets, and networks while gaining access to Ctrl's new features and improved performance.",
     },
     {
       question: "How do I migrate my $XDEFI to $CTRL?",
@@ -64,7 +64,6 @@ export default function FAQSection() {
   return (
     <section className="w-full bg-[#F9FAF9] py-24 px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
-        {/* Top header section */}
         <div className="mb-16">
           <div className="flex justify-end">
             <span className="text-5xl mr-60 rounded-full">
@@ -75,7 +74,6 @@ export default function FAQSection() {
           <h2 className="text-5xl md:text-7xl font-semibold text-black">FAQ</h2>
         </div>
 
-        {/* FAQ list */}
         <div className="flex flex-col gap-6">
           {faqs.map((faq, index) => (
             <FAQItem
@@ -88,7 +86,9 @@ export default function FAQSection() {
             />
           ))}
           <div className="text-center mt-10">
-            <Button variant="black" className="bg-transparent text-black!">Show all questions</Button>
+            <Button variant="black" className="bg-transparent text-black!">
+              Show all questions
+            </Button>
           </div>
         </div>
       </div>

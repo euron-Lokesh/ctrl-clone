@@ -15,7 +15,6 @@ const Footer = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          // Set initial dot state - visible and at left position
           const dot = element.querySelector(".footer-dot") as HTMLElement;
           const textElement = element.querySelector(
             ".footer-textReveal"
@@ -25,10 +24,9 @@ const Footer = () => {
             dot.style.left = "0%";
           }
 
-          let isLevelUp = true; // Track which text to show
+          let isLevelUp = true;
 
           const createCycle = () => {
-            // Update text content before animation starts
             if (textElement) {
               textElement.textContent = isLevelUp ? "Level up" : "Take Ctrl";
             }
@@ -36,15 +34,12 @@ const Footer = () => {
             const timeline = createTimeline({
               autoplay: true,
               onComplete: () => {
-                // Toggle text for next cycle and restart
                 isLevelUp = !isLevelUp;
                 setTimeout(() => createCycle(), 0);
               },
             });
 
-            // Animation sequence
             timeline
-              // 1. REVEAL: Dot moves from left to end + Text reveals
               .add(
                 ".footer-dot",
                 {
@@ -62,11 +57,7 @@ const Footer = () => {
                 },
                 0
               )
-
-              // 2. HOLD: Stay revealed for 3 seconds
               .add({}, { duration: 3000 }, 600)
-
-              // 3. HIDE: Text hide + Dot moves back (starts at 3600ms)
               .add(
                 ".footer-textReveal",
                 {
@@ -84,14 +75,10 @@ const Footer = () => {
                 },
                 3600
               )
-
-              // 4. PAUSE: 2 seconds before next cycle
               .add({}, { duration: 2000 });
           };
 
-          // Start the animation cycle
           createCycle();
-
           observer.disconnect();
         }
       },
@@ -106,10 +93,9 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className="w-full  bg-white text-black flex flex-col items-center pt-28 pb-20 px-6 md:px-24 font-sans overflow-hidden"
+      className="w-full bg-white text-black flex flex-col items-center pt-28 pb-20 px-6 md:px-24 font-sans overflow-hidden"
     >
-      {/* === Newsletter Section === */}
-      <div className="w-full max-w-5xl px-40 text-start  mb-16">
+      <div className="w-full max-w-5xl px-40 text-start mb-16">
         <h2 className="text-3xl font-medium text-gray-800">Newsletter</h2>
         <p className="text-gray-500 mb-8">
           Subscribe to our amazing newsletter to receive all the latest news &
@@ -129,7 +115,6 @@ const Footer = () => {
       </div>
 
       <div className="w-full px-20">
-        {/* === Level Up Animation (Matching Hero Structure) === */}
         <div className="relative w-full h-full flex items-center justify-start mb-24">
           <div className="relative text-center overflow-visible">
             <div className="footer-dot opacity-0 absolute bottom-[10%] left-1/2 font-[Tomato Grotesk,Arial,sans-serif] -translate-x-1/2 w-[25px] h-[25px] rounded-full bg-black" />
@@ -142,9 +127,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* === Footer Navigation === */}
         <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between items-center md:items-start gap-16 md:gap-0 text-center md:text-left">
-          {/* Left - Social Icons */}
           <div className="flex gap-5 md:gap-6">
             <Link
               href="#"
@@ -172,9 +155,7 @@ const Footer = () => {
             </Link>
           </div>
 
-          {/* Middle - Links Grid */}
           <div className="grid grid-cols-3 gap-12">
-            {/* Product */}
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-lg mb-1">Product</h3>
               <a href="#" className="text-gray-700 hover:text-black">
@@ -185,7 +166,6 @@ const Footer = () => {
               </a>
             </div>
 
-            {/* Company */}
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-lg mb-1">Company</h3>
               <a href="#" className="text-gray-700 hover:text-black">
@@ -199,7 +179,6 @@ const Footer = () => {
               </a>
             </div>
 
-            {/* Resources */}
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-lg mb-1">Resources</h3>
               <a href="#" className="text-gray-700 hover:text-black">
@@ -217,7 +196,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Right - Language */}
           <div className="flex flex-col items-center md:items-end gap-2">
             <h3 className="font-semibold text-lg flex items-center gap-1">
               <Globe size={18} /> English

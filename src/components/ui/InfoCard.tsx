@@ -21,18 +21,14 @@ export function InfoCard({
     <div
       className={`bg-[#F1F2EF] h-full rounded-2xl p-6 relative overflow-hidden ${className}`}
     >
-      {/* Title */}
       <h3 className={titleClassName}>{title}</h3>
 
-      {/* Optional Subtext */}
       {subtext && <p className={subtextClassName}>{subtext}</p>}
 
-      {/* Optional SVG */}
       {svgComponent && (
         <div className="absolute bottom-6 left-6 z-10">{svgComponent}</div>
       )}
 
-      {/* Optional Video */}
       {videoSrc && (
         <video
           className="absolute bottom-0 left-0 right-0 w-full m-auto h-[65%] object-cover z-0"

@@ -31,7 +31,6 @@ const SecurityHighlights: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  // 🟢 Heading Animation (like Community) - ORIGINAL CODE
   useEffect(() => {
     if (!headerRef.current) return;
 
@@ -42,7 +41,6 @@ const SecurityHighlights: React.FC = () => {
     const iconEl = headerEl.querySelector(".hero-icon") as HTMLElement;
     const secondLine = headerEl.querySelector(".second-line") as HTMLElement;
 
-    // Set initial states
     [greenDot, headingText, mainLine, iconEl, secondLine].forEach((el) => {
       if (el) {
         el.style.opacity = "0";
@@ -58,7 +56,6 @@ const SecurityHighlights: React.FC = () => {
               autoplay: true,
             });
 
-            // 1. "Secure and private" text from right
             tl.add(".secure-text", {
               translateX: [{ from: "300px", to: "0px" }],
               opacity: [{ from: 0, to: 1 }],
@@ -66,7 +63,6 @@ const SecurityHighlights: React.FC = () => {
               ease: "outExpo",
             });
 
-            // 2. Big headline: "The Secure way"
             tl.add(
               ".main-line",
               {
@@ -78,7 +74,6 @@ const SecurityHighlights: React.FC = () => {
               "-=1000"
             );
 
-            // 3. Icon fade + slide
             tl.add(
               ".hero-icon",
               {
@@ -90,7 +85,6 @@ const SecurityHighlights: React.FC = () => {
               "-=800"
             );
 
-            // 4. Final line "to Web3"
             tl.add(
               ".second-line",
               {
@@ -102,7 +96,6 @@ const SecurityHighlights: React.FC = () => {
               "-=800"
             );
 
-            // 🟢 5. Small "follow-up" motion — move both icon + text slightly to right together
             tl.add(
               [".hero-icon", ".second-line"],
               {
@@ -110,7 +103,7 @@ const SecurityHighlights: React.FC = () => {
                 duration: 800,
                 easing: "easeInOutSine",
               },
-              "-=400" // slight delay after previous animation finishes
+              "-=400"
             );
 
             observer.unobserve(entry.target);
@@ -124,7 +117,6 @@ const SecurityHighlights: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // 🟡 Scroll-synced Cards Animation - IMPROVED VERSION
   useEffect(() => {
     const header = document.querySelector(
       ".section-header"
@@ -134,7 +126,6 @@ const SecurityHighlights: React.FC = () => {
     ) as HTMLElement | null;
     if (!header || !cards) return;
 
-    // Set initial states
     header.style.opacity = "1";
     header.style.transform = "translateY(0px) scale(1)";
     cards.style.opacity = "1";
@@ -144,21 +135,19 @@ const SecurityHighlights: React.FC = () => {
       autoplay: onScroll({
         container: "body",
         target: ".security-scroll-wrapper",
-        sync: true, // Perfect scroll sync
+        sync: true,
         enter: "top top",
         leave: "bottom bottom",
       }),
-      defaults: { duration: 1800 }, // Base duration for smooth transitions
+      defaults: { duration: 1800 },
     });
 
-    // === Phase 1: Initial hold (let user see the heading) ===
     tl.add(".security-cards", {
       translateY: [{ from: "0px", to: "0px" }],
       duration: 1000,
       ease: "linear",
     });
 
-    // === Phase 2: Lift cards + fade header ===
     tl.add(".security-cards", {
       translateY: [{ from: "0px", to: "-420px" }],
       opacity: [{ from: 0.85, to: 1 }],
@@ -173,17 +162,15 @@ const SecurityHighlights: React.FC = () => {
         duration: 1000,
         easing: "easeInOutSine",
       },
-      "-=3500" // Overlap with card animation
+      "-=3500"
     );
 
-    // === Phase 3: Hold at center (showcase the cards) ===
     tl.add(".security-cards", {
       translateY: [{ from: "-420px", to: "-430px" }],
       duration: 1800,
       easing: "linear",
     });
 
-    // === Phase 4: Slide left (dynamic movement) ===
     tl.add(
       ".security-cards",
       {
@@ -194,14 +181,12 @@ const SecurityHighlights: React.FC = () => {
       "+=300"
     );
 
-    // === Phase 5: Hold at final position ===
     tl.add(".security-cards", {
-      translateY: [{ from: "-430px", to: "-430px" }], // No Y movement, just hold
+      translateY: [{ from: "-430px", to: "-430px" }],
       duration: 1200,
       easing: "linear",
     });
 
-    // === Phase 6: Final exit fade ===
     tl.add(".security-cards", {
       translateY: [{ from: "-440px", to: "-580px" }],
       opacity: [{ from: 1, to: 0.9 }],
@@ -209,7 +194,6 @@ const SecurityHighlights: React.FC = () => {
       easing: "easeInOutSine",
     });
 
-    // === Phase 7: Final hold (ensures smooth section exit) ===
     tl.add(".security-scroll-wrapper", {
       translateY: [{ from: "0px", to: "0px" }],
       duration: 800,
@@ -224,10 +208,9 @@ const SecurityHighlights: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="security-scroll-wrapper pt-38 relative bg-[#F4F4F4] w-full h-[400vh]  z-40" // 🔥 KEY FIX: Added h-[600vh] for viewport locking
+      className="security-scroll-wrapper pt-38 relative bg-[#F4F4F4] w-full h-[400vh] z-40"
     >
       <div className="sticky top-30 min-h-screen flex flex-col justify-center">
-        {/* === Header === */}
         <div ref={headerRef} className="px-28 section-header mb-20 text-center">
           <div className="flex justify-end">
             <span className="text-4xl mr-96 rounded-full font-semibold secure-text">
@@ -249,7 +232,6 @@ const SecurityHighlights: React.FC = () => {
           </div>
         </div>
 
-        {/* === Cards === */}
         <div className="security-cards pt-20 px-6 flex justify-end gap-x-4 h-[42rem]">
           {SecurityDetails.map((card, index) => (
             <InfoCard
@@ -258,7 +240,7 @@ const SecurityHighlights: React.FC = () => {
               subtext={card.subtext}
               videoSrc={card.videoSrc}
               svgComponent={null}
-              className="w-[21rem]  rounded-4xl transform transition-transform duration-700 hover:-translate-y-8"
+              className="w-[21rem] rounded-4xl transform transition-transform duration-700 hover:-translate-y-8"
               titleClassName="text-[28px] font-medium text-black"
               subtextClassName="text-lg text-gray-800 mt-4"
             />
