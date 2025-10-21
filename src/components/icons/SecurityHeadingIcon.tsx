@@ -5,10 +5,10 @@ interface SecurityHeadingIconProps {
   className?: string;
 }
 
-const SecurityHeadingIcon: React.FC<SecurityHeadingIconProps> = ({
+const SecurityHeadingIcon = ({
   size = 80,
   className,
-}) => (
+}: SecurityHeadingIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 280 200"

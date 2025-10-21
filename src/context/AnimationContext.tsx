@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 type AnimationPhase = "idle" | "hero" | "header" | "button" | "complete";
 
@@ -19,8 +19,10 @@ export const useAnimation = () => {
   return context;
 };
 
-export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({
+export const AnimationProvider = ({
   children,
+}: {
+  children: React.ReactNode;
 }) => {
   const [phase, setPhase] = useState<AnimationPhase>("idle");
 

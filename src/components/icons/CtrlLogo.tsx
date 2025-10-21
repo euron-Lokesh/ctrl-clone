@@ -10,7 +10,7 @@ export default function CtrlLogoIcon({
   return (
     <svg
       width={size}
-      height={size * (53 / 160)} // maintains aspect ratio
+      height={size * (53 / 160)}
       viewBox="0 0 160 53"
       xmlns="http://www.w3.org/2000/svg"
       className={className}

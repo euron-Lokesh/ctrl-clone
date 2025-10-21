@@ -6,9 +6,11 @@ interface OverviewHorizontalFeatureCardProps {
   videoSrc: string;
 }
 
-const OverviewHorizontalFeatureCard: React.FC<
-  OverviewHorizontalFeatureCardProps
-> = ({ title, description, videoSrc }) => {
+const OverviewHorizontalFeatureCard = ({
+  title,
+  description,
+  videoSrc,
+}: OverviewHorizontalFeatureCardProps) => {
   return (
     <div className="bg-[#F9FAF9] flex justify-center flex-nowrap items-center gap-x-24 mx-64 p-28 rounded-2xl">
       <div>

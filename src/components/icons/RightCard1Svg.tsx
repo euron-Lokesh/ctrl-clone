@@ -39,7 +39,6 @@ export default function RightCard1Svg({
         >
           <g opacity="1" transform="matrix(1,0,0,1,0,0)">
             <g opacity="1" transform="matrix(1,0,0,1,0,0)">
-              {/* Blue Circle */}
               <g opacity="0" transform="matrix(1,0,0,1,0,-60)">
                 <path
                   fill="rgb(157,196,245)"
@@ -59,7 +58,6 @@ export default function RightCard1Svg({
                 />
               </g>
 
-              {/* “C” Shape */}
               <g opacity="0" transform="matrix(1,0,0,1,0,-60)">
                 <path
                   fill="rgb(0,20,5)"
@@ -72,7 +70,6 @@ export default function RightCard1Svg({
                 />
               </g>
 
-              {/* Yellow Circle */}
               <g opacity="0" transform="matrix(1,0,0,1,0,-60)">
                 <path
                   fill="rgb(251,231,78)"
@@ -92,7 +89,6 @@ export default function RightCard1Svg({
                 />
               </g>
 
-              {/* “T” Shape */}
               <g opacity="0" transform="matrix(1,0,0,1,0,-60)">
                 <path
                   fill="rgb(0,20,5)"
@@ -101,7 +97,6 @@ export default function RightCard1Svg({
                 />
               </g>
 
-              {/* Green Circle */}
               <g opacity="0" transform="matrix(1,0,0,1,0,-60)">
                 <path
                   fill="rgb(5,201,47)"
@@ -121,7 +116,6 @@ export default function RightCard1Svg({
                 />
               </g>
 
-              {/* Arrow Shape */}
               <g opacity="0" transform="matrix(1,0,0,1,0,-60)">
                 <path
                   fill="rgb(0,20,5)"

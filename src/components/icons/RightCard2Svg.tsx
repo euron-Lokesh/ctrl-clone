@@ -1,6 +1,6 @@
 import React from "react";
 
-const RightCard2Svg: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+const RightCard2Svg = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"

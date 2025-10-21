@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Search,
   Triangle,
@@ -27,7 +27,7 @@ interface ItemStyle {
   zIndex: number;
 }
 
-const ChainWallet: React.FC = () => {
+const ChainWallet = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollY, setScrollY] = useState<number>(0);
   const [searchValue, setSearchValue] = useState<string>("");
