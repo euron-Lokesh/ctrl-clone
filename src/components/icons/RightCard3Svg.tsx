@@ -1,14 +1,13 @@
-// RightCard3Svg Component
 interface RightCard3SvgProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
 }
 
-export const RightCard3Svg: React.FC<RightCard3SvgProps> = ({
+export const RightCard3Svg = ({
   size = 100,
   width,
   height,
   ...props
-}) => (
+}: RightCard3SvgProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"

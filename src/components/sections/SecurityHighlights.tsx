@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { createTimeline, onScroll } from "animejs";
 import SecurityHeadingIcon from "../icons/SecurityHeadingIcon";
 import { InfoCard } from "../ui/InfoCard";
@@ -27,7 +27,7 @@ const SecurityDetails = [
   },
 ];
 
-const SecurityHighlights: React.FC = () => {
+const SecurityHighlights = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 

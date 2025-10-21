@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { createTimeline } from "animejs";
 import OverviewHorizontalFeatureCard from "../ui/OverviewHorizontalFeatureCard";
 import { RightCard3Svg } from "../icons/RightCard3Svg";
@@ -25,7 +25,7 @@ const overviewFeatures = [
   },
 ];
 
-const Overview: React.FC = () => {
+const Overview = () => {
   const overviewRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const heroTextRef = useRef<HTMLDivElement>(null);

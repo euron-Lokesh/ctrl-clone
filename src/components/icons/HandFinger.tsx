@@ -1,17 +1,15 @@
-import React from "react";
-
 interface HandFingerProps {
-  size?: number; // default size control
-  className?: string; // optional for Tailwind overrides
+  size?: number;
+  className?: string;
 }
 
-const HandFinger: React.FC<HandFingerProps> = ({ size = 110, className }) => {
+const HandFinger = ({ size = 110, className }: HandFingerProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 110 130"
       width={size}
-      height={(size * 130) / 110} // keep aspect ratio consistent
+      height={(size * 130) / 110}
       preserveAspectRatio="xMidYMid meet"
       className={className}
     >
