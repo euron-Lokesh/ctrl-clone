@@ -10,15 +10,15 @@ const OverviewHorizontalFeatureCard: React.FC<
   OverviewHorizontalFeatureCardProps
 > = ({ title, description, videoSrc }) => {
   return (
-    <div className="bg-[#F9FAF9] flex justify-center items-center gap-x-24 mx-64 p-28 rounded-2xl">
+    <div className="bg-[#F9FAF9] flex justify-center flex-nowrap items-center gap-x-24 mx-64 p-28 rounded-2xl">
       {/* Left Side - Text */}
       <div>
         <div className="space-y-8">
-          <h1 className="text-[4.5rem] lg:text-[4.5rem] text-black leading-[0.85] tracking-[-0.02em]">
+          <h1 className="text-[1.5rem] lg:text-[2.4rem] xl:text-[2.8rem] 2xl:text-[3.3rem]  text-black leading-[0.85] tracking-[-0.02em]">
             {title}
           </h1>
 
-          <p className="text-gray-600 text-[1.1rem] lg:text-[1.4rem] leading-[1.5] max-w-[32rem] font-medium">
+          <p className="text-gray-600 text-[1.1rem] lg:text-[1.2rem] xl:text-[1.4rem] leading-[1.5] max-w-[32rem] font-medium">
             {description}
           </p>
         </div>

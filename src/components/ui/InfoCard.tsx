@@ -19,7 +19,7 @@ export function InfoCard({
 }: InfoCardProps) {
   return (
     <div
-      className={`bg-[#ECEFEC] h-full border-2 border-gray-200 rounded-2xl p-6 relative overflow-hidden ${className}`}
+      className={`bg-[#F1F2EF] h-full rounded-2xl p-6 relative overflow-hidden ${className}`}
     >
       {/* Title */}
       <h3 className={titleClassName}>{title}</h3>
@@ -35,7 +35,7 @@ export function InfoCard({
       {/* Optional Video */}
       {videoSrc && (
         <video
-          className="absolute bottom-0 left-0 right-0 w-full h-[65%] object-cover z-0"
+          className="absolute bottom-0 left-0 right-0 w-full m-auto h-[65%] object-cover z-0"
           autoPlay
           loop
           muted

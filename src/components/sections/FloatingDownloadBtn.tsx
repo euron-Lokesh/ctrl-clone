@@ -14,19 +14,19 @@ export default function FloatingDownloadBtn() {
   const [isCompact, setIsCompact] = useState(false);
   const [hasExpandedAtBottom, setHasExpandedAtBottom] = useState(false);
 
-  // Function to get responsive top position
+  // Function to get responsive top position with increased spacing
   const getResponsiveTopPosition = () => {
     const screenHeight = window.innerHeight;
 
     if (screenHeight <= 768) {
-      // Small screens - move button higher to avoid overlap
-      return screenHeight - 250;
+      // Small screens - increased spacing by 50px
+      return screenHeight - 200;
     } else if (screenHeight <= 900) {
-      // Medium screens
-      return screenHeight - 350;
+      // Medium screens - increased spacing by 50px
+      return screenHeight - 300;
     } else {
-      // Large screens (original behavior)
-      return screenHeight - 400;
+      // Large screens - increased spacing by 50px
+      return screenHeight - 350;
     }
   };
 
@@ -206,19 +206,19 @@ export default function FloatingDownloadBtn() {
   }, [isAtBottom, isCompact, hasExpandedAtBottom]);
 
   // State for initial position to avoid hydration mismatch
-  const [initialPosition, setInitialPosition] = useState("calc(100vh - 400px)");
+  const [initialPosition, setInitialPosition] = useState("calc(100vh - 350px)");
 
-  // Set responsive position after component mounts
+  // Set responsive position after component mounts with increased spacing
   useEffect(() => {
     const updatePosition = () => {
       const screenHeight = window.innerHeight;
 
       if (screenHeight <= 768) {
-        setInitialPosition("calc(100vh - 250px)");
+        setInitialPosition("calc(100vh - 200px)");
       } else if (screenHeight <= 900) {
-        setInitialPosition("calc(100vh - 350px)");
+        setInitialPosition("calc(100vh - 300px)");
       } else {
-        setInitialPosition("calc(100vh - 400px)");
+        setInitialPosition("calc(100vh - 350px)");
       }
     };
 
