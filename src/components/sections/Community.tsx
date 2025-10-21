@@ -4,8 +4,9 @@ import React, { useEffect, useRef } from "react";
 import { createTimeline } from "animejs";
 import HandFinger from "../icons/HandFinger";
 import { ColoredCard } from "../ui/ColoredCard";
+import { CommunityDetail } from "@/types/CommunityDetail";
 
-const CommunityDetails = [
+const CommunityDetails: CommunityDetail[] = [
   {
     color: "blue",
     text: "Founded in 2020, Ctrl (formerly XDEFI) was the world's first multichain wallet.",

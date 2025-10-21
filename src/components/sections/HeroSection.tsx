@@ -2,13 +2,7 @@
 import { createTimeline } from "animejs";
 import { useEffect, useRef } from "react";
 import { useAnimation } from "@/context/AnimationContext";
-
-interface HeroSectionProps {
-  text: string;
-  dotColor?: string;
-  className?: string;
-  BadgeIcon?: React.ReactNode;
-}
+import { HeroSectionProps } from "@/types/HeroSection";
 
 export default function HeroSection({
   text,
