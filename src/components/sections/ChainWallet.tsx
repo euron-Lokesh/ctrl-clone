@@ -12,20 +12,8 @@ import {
   Sun,
   Layers,
   Circle,
-  LucideIcon,
 } from "lucide-react";
-
-interface Blockchain {
-  name: string;
-  color: string;
-  icon: LucideIcon;
-}
-
-interface ItemStyle {
-  transform: string;
-  opacity: number;
-  zIndex: number;
-}
+import { Blockchain, ItemStyle } from "@/types/ChainWallet";
 
 const ChainWallet = () => {
   const sectionRef = useRef<HTMLElement>(null);
