@@ -224,7 +224,7 @@ const SecurityHighlights: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="security-scroll-wrapper pt-38 relative bg-[#F4F4F4] w-full h-[400vh] border z-40" // 🔥 KEY FIX: Added h-[600vh] for viewport locking
+      className="security-scroll-wrapper pt-38 relative bg-[#F4F4F4] w-full h-[400vh]  z-40" // 🔥 KEY FIX: Added h-[600vh] for viewport locking
     >
       <div className="sticky top-30 min-h-screen flex flex-col justify-center">
         {/* === Header === */}
