@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { Blockchain, ItemStyle } from "@/types/ChainWallet";
 
-const ChainWallet = () => {
+const WheelChainWallet = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollY, setScrollY] = useState<number>(0);
   const [searchValue, setSearchValue] = useState<string>("");
@@ -227,4 +227,4 @@ const ChainWallet = () => {
   );
 };
 
-export default ChainWallet;
+export default WheelChainWallet;
