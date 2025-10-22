@@ -2,7 +2,7 @@
 import CtrlBadgeIcon from "@/components/icons/ctrlBadgeIcon";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
-import ChainWallet from "@/components/sections/ChainWallet";
+import WheelChainWallet from "@/components/sections/WheelChainWallet";
 import Community from "@/components/sections/Community";
 import FAQSection from "@/components/sections/Faq";
 import FeaturesSection from "@/components/sections/Features";
@@ -22,7 +22,7 @@ export default function Home() {
       <HeroSection BadgeIcon={<CtrlBadgeIcon size={120} />} text="Take Ctrl" />
       <FloatingDownloadBtn />
       <FeaturesSection />
-      <ChainWallet />
+      <WheelChainWallet />
       <Overview />
       <Community />
       <SecurityHighlights />
